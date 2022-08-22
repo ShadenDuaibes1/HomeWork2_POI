@@ -10,9 +10,10 @@ import org.testng.asserts.SoftAssert;
 
 
 public class FirstTestNGfile {
-    public String baseUrl = "https://www.ballarddesigns.com/";
-    String driverPath = "C:\\Users\\Hp\\Desktop\\seleinum\\selenium-java-4.4.0\\geckodriver.exe";
-    public WebDriver driver ; 
+   // private static final String logonButton = null;
+	public String baseUrl = "https://www.frontgate.com/ShoppingCartView";
+    static String driverPath = "C:\\Users\\Hp\\Desktop\\seleinum\\selenium-java-4.4.0\\geckodriver.exe";
+    public static WebDriver driver ; 
     	
   @Test
   public void verifyLogo() {
@@ -27,21 +28,21 @@ public class FirstTestNGfile {
       soft.assertAll();
   }
   @Test
-  public void signIn() {
+  public static void signIn() {
 	  System.out.println("launching firefox browser"); 
       System.setProperty("webdriver.gecko.driver", driverPath);
       driver = new FirefoxDriver();
       driver.get("baseUrl");
       driver.manage().window().maximize();
-      driver.findElement(By.linkText("Sign In/Register")).click();
+      driver.findElement(By.className("class=button primary")).click();
       
   }
   @Test
-  public void Register() {
+  public static void Register(String Path) {
 	  System.out.println("launching firefox browser"); 
       System.setProperty("webdriver.gecko.driver", driverPath);
       driver = new FirefoxDriver();
-      driver.get("https://www.ballarddesigns.com/UserLogonView?storeId=10052&catalogId=10551&langId=-1");
+      driver.get(Path);
       driver.manage().window().maximize();
       String expected ="Welcome back! ";
       String t =  driver.findElement(By.cssSelector("#mainContent > div.data")).getText();
@@ -56,15 +57,15 @@ public class FirstTestNGfile {
       soft.assertAll();	  
   }
   @Test
-  public void EnterInformation() {
+  public static void EnterInformation(String Us, String pass) {
 	  System.out.println("launching firefox browser"); 
       System.setProperty("webdriver.gecko.driver", driverPath);
       driver = new FirefoxDriver();
-      driver.get("https://www.ballarddesigns.com/UserLogonView?storeId=10052&catalogId=10551&langId=-1");
+      driver.get("https://www.frontgate.com/ShoppingCartView");
       driver.manage().window().maximize();
       SoftAssert soft= new SoftAssert();
-      driver.findElement(By.name("Email")).sendKeys("shaden");
-      driver.findElement(By.name("Password")).sendKeys("shaden");
+      driver.findElement(By.name("Email")).sendKeys(Us);
+      driver.findElement(By.name("Password")).sendKeys(pass);
       driver.findElement(By.name("SIGN IN")).click();
       String expected ="My Account ";
       String t =  driver.findElement(By.cssSelector("#mainContent > div.data")).getText();
